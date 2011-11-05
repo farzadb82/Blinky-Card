@@ -16,7 +16,7 @@
 
 #define LED1 PB1
 #define LED2 PB2
-#define LED2 PB3
+#define LED3 PB3
 
 
 int main(void)
