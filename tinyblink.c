@@ -14,41 +14,35 @@
 #define set_input(portdir,pin) portdir &= ~(1<<pin)
 #define set_output(portdir,pin) portdir |= (1<<pin)
 
-#define LED1 PB1
-#define LED2 PB2
-#define LED3 PB3
+#define LED1 PB0
+#define LED2 PB1
+#define LED3 PB2
 
 
 int main(void)
 {
     const int msecsDelayPost = 500;
     
-    // Set up Port B pin 4 mode to output
-    DDRB |= 1<<LED1;
+    // Setup the Port for I/O
+    set_output(DDRB, LED1);
+    set_output(DDRB, LED2);
+    set_output(DDRB, LED3);
     
-    // Set up Port B pin 4 mode to output
-    DDRB |= 1<<LED2;
-    
-    // Set up Port B pin 4 mode to output
-    DDRB |= 1<<LED3;
-    
-    // Set up Port B data to be all low
-    PORTB = 0;  
-    
-    // Toggle Port B pin 4 output state
-    PORTB ^= 1<<PB3;
+    // Setup the initial state
+    output_low(PORTB, LED1);
+    output_high(PORTB, LED2);
+    output_low(PORTB, LED3);
     
     while (1) {
-        // Toggle Port B pin 4 output state
-        PORTB ^= 1<<PB4;
-
-        // Toggle Port B pin 4 output state
-        PORTB ^= 1<<PB3;
- 
+        // Toggle all ports
+        output_toggle(PORTB, LED1);
+        output_toggle(PORTB, LED2);
+        output_toggle(PORTB, LED3);
+        
         // Pause a little while
         _delay_ms (msecsDelayPost);
     }
- 
+    
     return 0;
 }
 
