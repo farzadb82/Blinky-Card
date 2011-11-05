@@ -21,7 +21,9 @@
 
 int main(void)
 {
-    const int msecsDelayPost = 500;
+    const int msecsDelayPost = 700;
+    int output[] = { 1, 2, 4, 7, 0, 7, 3, 6, 7, 4, 2, 1, 0 };
+    int idx = 0;
     
     // Setup the Port for I/O
     set_output(DDRB, LED1);
@@ -30,17 +32,18 @@ int main(void)
     
     // Setup the initial state
     output_low(PORTB, LED1);
-    output_high(PORTB, LED2);
+    output_low(PORTB, LED2);
     output_low(PORTB, LED3);
     
     while (1) {
         // Toggle all ports
-        output_toggle(PORTB, LED1);
-        output_toggle(PORTB, LED2);
-        output_toggle(PORTB, LED3);
+        PORTB = output[idx];
         
         // Pause a little while
         _delay_ms (msecsDelayPost);
+        
+        idx += 1;
+        if (idx > sizeof(output)) { idx = 0; }
     }
     
     return 0;
