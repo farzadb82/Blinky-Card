@@ -1,5 +1,5 @@
-PRG            = tinyblink
-OBJ            = tinyblink.o
+PRG            = blinkycard
+OBJ            = blinkycard.o
 #MCU_TARGET     = at90s2313
 #MCU_TARGET     = at90s2333
 #MCU_TARGET     = at90s4414
@@ -75,7 +75,7 @@ $(PRG).elf: $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
 # dependency:
-tinyblink.o: tinyblink.c
+blinkycard.o: blinkycard.c
 
 clean:
 	rm -rf *.o $(PRG).elf *.eps *.png *.pdf *.bak 
